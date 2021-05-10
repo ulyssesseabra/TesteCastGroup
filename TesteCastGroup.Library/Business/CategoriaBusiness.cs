@@ -74,7 +74,7 @@ namespace TesteCastGroup.Library.Business
 
 
         /// <summary>
-        /// Inicializa as categorias dos curso se basendo no quantitativo de Categorias
+        /// Inicializa as categorias dos curso se basendo no quantitativo de Categorias, isso dentro do Startup da API
         /// </summary>
         /// <returns></returns>
         public void Init()

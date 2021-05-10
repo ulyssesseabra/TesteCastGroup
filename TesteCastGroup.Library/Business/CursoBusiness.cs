@@ -81,31 +81,11 @@ namespace TesteCastGroup.Library.Business
         public bool VerificaTemCursoPeriodo(DateTime parDataInicio, DateTime parDataFinal)
         {
 
+            return (from curso in objTesteCastGroupContext.Cursos
+                            where (parDataInicio.Date >= curso.DataInicio.Date && parDataInicio.Date <= curso.DataTerminio.Date)
+                            ||(parDataFinal.Date >= curso.DataInicio.Date && parDataFinal.Date <= curso.DataTerminio.Date)
+                            select curso).Count()>0;
 
-
-
-
-            int countIni = (from curso in objTesteCastGroupContext.Cursos
-                            where parDataInicio.Date >= curso.DataInicio.Date && parDataInicio.Date <= curso.DataTerminio.Date
-                            select curso).Count();
-
-            int countFin = (from curso in objTesteCastGroupContext.Cursos
-                            where parDataFinal.Date >= curso.DataInicio.Date   && parDataFinal.Date <= curso.DataTerminio.Date
-                            select curso).Count();
-
-
-
-
-
-
-            //A junção OR não estava refletindo a lógica da data inicial ou final estar dentro do periodo de outro curso
-            //int countIni = objTesteCastGroupContext.Cursos.Where(c =>
-            // (c.DataInicio.Date >= parDataInicio.Date && parDataInicio.Date <= c.DataTerminio.Date)).Count();
-
-            //int countFin = objTesteCastGroupContext.Cursos.Where(c =>
-            // (c.DataInicio.Date >= parDataFinal.Date && parDataFinal.Date <= c.DataTerminio.Date)).Count();
-
-            return countIni + countFin > 0;
         }
     }
 }
